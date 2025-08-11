@@ -1,5 +1,7 @@
+
 import random
 import os
+import copy
 
 def inicio():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -106,7 +108,7 @@ def selecionaTabuleiro(dif):
         filaI = [2, 3, 9, 8, 4, 1, 5, 6, 7]
 
     matriz=[filaA,filaB,filaC,filaD,filaE,filaF,filaG,filaH,filaI]
-    matrizOG=matriz.copy
+    matrizOG=copy.deepcopy(matriz)
     ocultaValores(matriz,dif,matrizOG)
 
 def ocultaValores(matriz, dif,matrizOG):
@@ -174,4 +176,3 @@ def jogar (matriz, matrizOG):
     inicio()
 
 inicio()
-
