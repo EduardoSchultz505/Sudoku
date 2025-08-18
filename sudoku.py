@@ -142,6 +142,7 @@ I ▏{} {} {} ▏ {} {} {} ▏ {} {} {} ▏
 
 def jogar (matriz, matrizOG):
     letras = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
+    print("Bem vindo!")
 
     while matriz!=matrizOG:
         mostrar_tabuleiro(matriz)
@@ -156,7 +157,7 @@ def jogar (matriz, matrizOG):
             inicio()
 
         if len(tentativa) != 3 or tentativa[0] not in letras or not tentativa[1].isdigit() or not tentativa[2].isdigit():
-            print("Posição incorreta")
+            print("Posição incorreta!")
             continue
 
         valor=tentativa[2]
@@ -165,6 +166,7 @@ def jogar (matriz, matrizOG):
 
         if int(valor)==matrizOG[linha][coluna]:
             (matriz[linha][coluna])=int(valor)
+            print("Correto!")
 
         else:
             print ("Jogada errada!")
@@ -175,4 +177,3 @@ def jogar (matriz, matrizOG):
     inicio()
 
 inicio()
-
