@@ -1,4 +1,3 @@
-
 import random
 import os
 import copy
@@ -176,3 +175,4 @@ def jogar (matriz, matrizOG):
     inicio()
 
 inicio()
+
