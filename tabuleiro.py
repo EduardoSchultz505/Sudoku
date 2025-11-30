@@ -3,45 +3,51 @@ import copy
 from dados import TABULEIROS
 
 class Board:
+    """Classe do tabuleiro de Sudoku, com encapsulamento e métodos públicos."""
+
     def __init__(self, dificuldade):
-        self.matrizOG = copy.deepcopy(random.choice(TABULEIROS))
-        self.matriz = copy.deepcopy(self.matrizOG)
+        self._matrizOG = copy.deepcopy(random.choice(TABULEIROS))
+        self._matriz = copy.deepcopy(self._matrizOG)
         self.ocultar(dificuldade)
 
     def ocultar(self, dif):
-        'Oculta valores aleatórios do tabuleiro'
+        """Oculta valores aleatórios do tabuleiro."""
         vazio = "."
         removidos = 0
-
         while removidos < dif:
             x = random.randrange(9)
             y = random.randrange(9)
-
-            if self.matriz[x][y] != vazio:
-                self.matriz[x][y] = vazio
+            if self._matriz[x][y] != vazio:
+                self._matriz[x][y] = vazio
                 removidos += 1
 
     def mostrar(self):
-        'Mostra o tabuleiro'
-        print(self.formatar(self.matriz))
+        """Mostra o tabuleiro com cores."""
+        print(self.formatar(self._matriz))
 
     def mostrar_final(self):
-        'Mostra o tabuleiro se o usuário digitar sair durante o jogo'
-        print(self.formatar(self.matrizOG))
+        """Mostra o tabuleiro original."""
+        print(self.formatar(self._matrizOG))
 
     def completo(self):
-        'Comparação para ver se o usuário já completou o tabuleiro'
-        return self.matriz == self.matrizOG
+        """Verifica se o tabuleiro foi completado."""
+        return self._matriz == self._matrizOG
 
     def jogada(self, linha, coluna, valor):
-        "Retorna True se acertou."
-        if self.matrizOG[linha][coluna] == valor:
-            self.matriz[linha][coluna] = valor
+        """Polimorfismo: retorna True se o valor estiver correto."""
+        if self._matrizOG[linha][coluna] == valor:
+            self._matriz[linha][coluna] = valor
             return True
-        return False
+        else:
+            # mesmo método, comportamento “diferente” se quiser alterar aqui
+            return False
 
-    def formatar(self, matriz):
-        'Define a cor dos valores, se certo ou errado'
+    def colocar_valor(self, linha, coluna, valor):
+        """Coloca um valor no tabuleiro sem verificar acerto."""
+        self._matriz[linha][coluna] = valor
+
+    def formatar(self, _matriz):
+        """Formata o tabuleiro para exibição com cores."""
         VERDE = "\033[92m"
         VERMELHO = "\033[91m"
         RESET = "\033[0m"
@@ -49,12 +55,11 @@ class Board:
         itens = []
         for i in range(9):
             for j in range(9):
-                valor = matriz[i][j]
-
+                valor = _matriz[i][j]
                 if valor == ".":
                     itens.append(".")
                 else:
-                    if valor == self.matrizOG[i][j]:
+                    if valor == self._matrizOG[i][j]:
                         itens.append(f"{VERDE}{valor}{RESET}")
                     else:
                         itens.append(f"{VERMELHO}{valor}{RESET}")
@@ -75,4 +80,3 @@ I ▏{} {} {} ▏ {} {} {} ▏ {} {} {} ▏
    ――――――――――――――――――――――''')
 
         return tabuleiro.format(*itens)
-
