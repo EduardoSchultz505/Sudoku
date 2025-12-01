@@ -3,7 +3,7 @@ import copy
 from dados import TABULEIROS
 
 class Board:
-    """Classe do tabuleiro de Sudoku, com encapsulamento e métodos públicos."""
+    """Classe do tabuleiro de Sudoku"""
 
     def __init__(self, dificuldade):
         self._matrizOG = copy.deepcopy(random.choice(TABULEIROS))
@@ -34,12 +34,11 @@ class Board:
         return self._matriz == self._matrizOG
 
     def jogada(self, linha, coluna, valor):
-        """Polimorfismo: retorna True se o valor estiver correto."""
+        """Retorna True se o valor estiver correto."""
         if self._matrizOG[linha][coluna] == valor:
             self._matriz[linha][coluna] = valor
             return True
         else:
-            # mesmo método, comportamento “diferente” se quiser alterar aqui
             return False
 
     def colocar_valor(self, linha, coluna, valor):

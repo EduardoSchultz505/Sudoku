@@ -1,18 +1,9 @@
 import os
 from tabuleiro import Board
-
-class JogoBase:
-    """Abstração por contrato."""
-    def inicio(self):
-        raise NotImplementedError()
-
-    def jogar(self, board: Board):
-        raise NotImplementedError()
-
+from abstract import JogoBase
 
 class Jogo(JogoBase):
     """Classe principal do Sudoku."""
-
     def __init__(self):
         self.letras = ['a','b','c','d','e','f','g','h','i']
 
